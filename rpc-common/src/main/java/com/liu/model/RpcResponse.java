@@ -1,14 +1,16 @@
 package com.liu.model;
 
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
  * 服务端返回参数
+ *
  * @author knuslus
  */
 @Data
+@NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
     /**
      * 请求id
@@ -29,7 +31,24 @@ public class RpcResponse<T> implements Serializable {
      */
     private T model;
 
-    public static <T> RpcResponse<T> Success(T model, long requestId) {
+    public void setRequestId(long requestId) {
+        this.requestId = requestId;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setModel(T model) {
+        this.model = model;
+    }
+
+
+    public static <T> RpcResponse<T> success(T model, long requestId) {
         RpcResponse rpcResponse = new RpcResponse();
         rpcResponse.setRequestId(requestId);
         rpcResponse.setCode(200);
@@ -38,7 +57,7 @@ public class RpcResponse<T> implements Serializable {
         return rpcResponse;
     }
 
-    public static <T> RpcResponse<T> Fail(long requestId) {
+    public static <T> RpcResponse<T> fail(long requestId) {
         RpcResponse rpcResponse = new RpcResponse();
         rpcResponse.setCode(500);
         rpcResponse.setMessage("请求失败");
