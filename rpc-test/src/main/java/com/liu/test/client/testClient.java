@@ -5,6 +5,10 @@ import com.liu.proxy.RpcClientProxy;
 import com.liu.service.RpcClient;
 import com.liu.test.server.helloServer;
 
+/**
+ * 客户端测试
+ * @author knuslus
+ */
 public class testClient {
     public static void main(String[] args) {
         RpcClientProxy rpcClientProxy = new RpcClientProxy("127.0.0.1", 90);
