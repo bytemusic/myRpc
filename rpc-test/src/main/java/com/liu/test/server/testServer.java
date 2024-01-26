@@ -9,7 +9,7 @@ import com.liu.server.RpcServer;
 public class testServer {
 
     public static void main(String[] args) {
-        hellpServerImpl server = new hellpServerImpl();
+        helloServer server = new helloServer();
         RpcServer rpcServer = new RpcServer();
         rpcServer.register(server, 90);
     }
