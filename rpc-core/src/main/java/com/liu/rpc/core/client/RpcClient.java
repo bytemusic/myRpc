@@ -20,12 +20,14 @@ public class RpcClient {
         logger.info("RpcClient.sendRequest rpcRequest:{}, host:{} ip:{}", rpcRequest, host, ip);
         try(Socket socket = new Socket(host, ip)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             objectOutputStream.writeObject(rpcRequest);
             objectOutputStream.flush();
-            return objectInputStream.readObject();
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            //无法读取
+            Object response = objectInputStream.readObject();
+            return response;
         } catch (Exception e) {
-            logger.warn("RpcClient.sendRequest warnning", e);
+            logger.warn("RpcClient.sendRequest warnning ", e);
             return null;
         }
     }
