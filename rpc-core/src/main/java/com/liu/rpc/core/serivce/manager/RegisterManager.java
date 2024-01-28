@@ -24,12 +24,12 @@ public class RegisterManager implements ServiceRegister {
     public <T> void registerService(T service) {
         //注册服务，有服务ip,
         Class<?>[] interfaces = service.getClass().getInterfaces();
-        for (Class<?> s : interfaces) {
-            if (serviceMap.containsKey(s.getCanonicalName())) {
+        for (Class<?> serviceName : interfaces) {
+            if (serviceMap.containsKey(serviceName.getCanonicalName())) {
                 return;
             } else {
-                logger.info("{}注册服务", s);
-                serviceMap.put(s.getCanonicalName(), service);
+                logger.info("{}注册服务", serviceName);
+                serviceMap.put(serviceName.getCanonicalName(), service);
             }
         }
     }
