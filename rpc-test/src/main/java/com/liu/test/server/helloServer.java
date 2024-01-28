@@ -14,6 +14,6 @@ public class helloServer implements RpcClient {
     @Override
     public String firstRpcMethod(FirstRpcModel FirstRpcModel) {
         logger.info("接收到服务{}", FirstRpcModel.getMessage());
-        return String.valueOf(FirstRpcModel.getId());
+        return "接收到服务id" + String.valueOf(FirstRpcModel.getId());
     }
 }
