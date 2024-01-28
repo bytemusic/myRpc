@@ -1,4 +1,4 @@
-package com.liu.proxy;
+package com.liu.rpc.core.proxy;
 
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

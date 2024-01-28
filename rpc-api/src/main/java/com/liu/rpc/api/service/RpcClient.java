@@ -1,6 +1,6 @@
-package com.liu.service;
+package com.liu.rpc.api.service;
 
-import com.liu.model.FirstRpcModel;
+import com.liu.rpc.api.model.FirstRpcModel;
 
 /**
  * @author knuslus

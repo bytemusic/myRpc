@@ -1,5 +1,7 @@
-package com.liu.server;
+package com.liu.rpc.core.server;
 
+import com.liu.rpc.core.serivce.ServiceRegister;
+import com.liu.rpc.core.serivce.manager.RegisterManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +18,12 @@ import java.util.concurrent.*;
 public class RpcServer {
     private final ExecutorService threadPool;
     private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
+    private ServiceRegister serviceRegister;
 
-    public RpcServer() {
+    private RequestHandle requestHandle;
+
+    public RpcServer(ServiceRegister serviceRegister) {
+        this.serviceRegister = serviceRegister;
         int corePoolSize = 5;
         int maximumPoolSize = 50;
         long keepAliveTime = 60;
@@ -26,15 +32,13 @@ public class RpcServer {
         threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, workingQueue, threadFactory);
     }
 
-    public void register(Object service, int port) {
+    public void start(Object service, int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             logger.info("服务器正在启动...");
             Socket socket;
-            while((socket = serverSocket.accept()) != null) {
+            while ((socket = serverSocket.accept()) != null) {
                 logger.info("客户端连接！Ip为：{}", socket.getInetAddress());
-                threadPool.execute(() -> {
-                    logger.info("注册服务");
-                });
+                threadPool.execute(new RequestHandleThread(socket, requestHandle, serviceRegister));
             }
         } catch (IOException e) {
             logger.error("连接时有错误发生：", e);

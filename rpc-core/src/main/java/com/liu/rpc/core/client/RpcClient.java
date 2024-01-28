@@ -1,6 +1,6 @@
-package com.liu.client;
+package com.liu.rpc.core.client;
 
-import com.liu.model.RpcRequest;
+import com.liu.rpc.common.model.RpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

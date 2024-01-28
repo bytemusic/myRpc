@@ -1,7 +1,7 @@
-package com.liu.test.server;
+package com.liu.rpc.test.server;
 
-import com.liu.model.FirstRpcModel;
-import com.liu.service.RpcClient;
+import com.liu.rpc.api.model.FirstRpcModel;
+import com.liu.rpc.api.service.RpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

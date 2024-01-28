@@ -1,4 +1,4 @@
-package com.liu.model;
+package com.liu.rpc.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

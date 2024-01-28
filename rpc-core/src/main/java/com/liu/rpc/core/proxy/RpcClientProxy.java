@@ -1,7 +1,7 @@
-package com.liu.proxy;
+package com.liu.rpc.core.proxy;
 
-import com.liu.client.RpcClient;
-import com.liu.model.RpcRequest;
+import com.liu.rpc.core.client.RpcClient;
+import com.liu.rpc.common.model.RpcRequest;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.InvocationHandler;
