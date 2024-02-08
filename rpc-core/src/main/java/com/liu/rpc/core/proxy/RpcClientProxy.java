@@ -1,6 +1,6 @@
 package com.liu.rpc.core.proxy;
 
-import com.liu.rpc.core.client.RpcClient;
+import com.liu.rpc.core.client.SocketClient;
 import com.liu.rpc.common.model.RpcRequest;
 import lombok.AllArgsConstructor;
 
@@ -28,8 +28,8 @@ public class RpcClientProxy implements InvocationHandler {
                 .param(args)
                 .build();
         //用RpcClient发送请求
-        RpcClient rpcClient = new RpcClient();
-        return rpcClient.sendRequest(rpcRequest, ip, port);
+        SocketClient rpcClient = new SocketClient(ip, port);
+        return rpcClient.sendRequest(rpcRequest);
     }
 
     /**
