@@ -9,10 +9,10 @@ import com.liu.rpc.core.server.SocketServer;
  * 服务端测试
  * @author knuslus
  */
-public class testServer {
+public class ServerTest {
 
     public static void main(String[] args) {
-        RpcClient server = new helloServer();
+        RpcClient server = new HelloServer();
         ServiceRegister serviceRegister = new RegisterManager();
         //注册服务
         serviceRegister.registerService(server);

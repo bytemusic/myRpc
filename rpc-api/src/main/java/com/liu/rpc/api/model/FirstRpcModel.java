@@ -1,14 +1,11 @@
 package com.liu.rpc.api.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
- *
  * @author knuslus
  */
 @Data
@@ -28,6 +25,7 @@ public class FirstRpcModel implements Serializable {
         this.id = id;
         this.message = message;
     }
+
     public String getMessage() {
         return message;
     }

@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author knuslus
  */
-public class helloServer implements RpcClient {
+public class HelloServer implements RpcClient {
 
-    private static final Logger logger = LoggerFactory.getLogger(helloServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloServer.class);
     @Override
     public String firstRpcMethod(FirstRpcModel FirstRpcModel) {
         logger.info("接收到服务{}", FirstRpcModel.getMessage());
