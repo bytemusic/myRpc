@@ -23,6 +23,5 @@ public class NettyServerTest {
         NettyServer nettyServer = new NettyServer();
         logger.info("启动服务");
         nettyServer.start(server, PORT);
-        logger.info("启动服务成功");
     }
 }
