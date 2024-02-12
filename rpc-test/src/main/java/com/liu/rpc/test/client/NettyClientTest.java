@@ -2,6 +2,7 @@ package com.liu.rpc.test.client;
 
 import com.liu.rpc.api.model.FirstRpcModel;
 import com.liu.rpc.api.service.RpcClient;
+import com.liu.rpc.core.client.NettyClient;
 import com.liu.rpc.core.proxy.RpcClientProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +18,13 @@ public class NettyClientTest {
 
     public static void main(String[] args) {
 
-//        RpcClient nettyClient = new NettyClient(IP, PORT);
-
-        RpcClientProxy rpcClientProxy = new RpcClientProxy(IP, PORT);
+        NettyClient nettyClient = new NettyClient(IP, PORT);
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(nettyClient);
         com.liu.rpc.api.service.RpcClient proxyClass = rpcClientProxy.getProxyClass(RpcClient.class);
         FirstRpcModel firstRpcModel= new FirstRpcModel();
         firstRpcModel.setId(000001);
         firstRpcModel.setMessage("netty消息");
+        logger.info("NettyClientTest start......");
         String messageId = proxyClass.firstRpcMethod(firstRpcModel);
         logger.info("message id {}", messageId);
     }
