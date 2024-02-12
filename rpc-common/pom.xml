@@ -23,6 +23,13 @@
             <version>${guava-version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+
+
     </dependencies>
 
 
