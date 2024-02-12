@@ -11,14 +11,17 @@ import java.io.IOException;
 
 public class CommonSerializerImpl implements CommonSerializer {
     private static final Logger logger = LoggerFactory.getLogger(CommonSerializerImpl.class);
-    private ObjectMapper objectMapper;
+    /**
+     * 不实例化会空指针
+     */
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public byte[] serializer(Object object) {
         try {
             return objectMapper.writeValueAsBytes(object);
         } catch (Exception e) {
-            logger.warn("CommonSerializerImpl.serializer warm", e);
+            logger.warn("CommonSerializerImpl.serializer warm {}", e.getMessage());
             throw new RpcException(RpcCode.SERIALIZER_ERROR, "CommonSerializerImpl.serializer warm");
         }
     }

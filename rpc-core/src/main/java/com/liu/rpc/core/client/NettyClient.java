@@ -12,7 +12,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
-import io.netty.util.concurrent.EventExecutorGroup;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -38,7 +37,7 @@ public class NettyClient implements RpcClient {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast((EventExecutorGroup) new CommonDecoder())
+                        pipeline.addLast(new CommonDecoder())
                                 .addLast(new CommonEncoder(new CommonSerializerImpl()))
                                 .addLast(new NettyClientHandler());
                     }
