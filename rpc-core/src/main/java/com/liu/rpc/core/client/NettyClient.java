@@ -2,11 +2,18 @@ package com.liu.rpc.core.client;
 
 import com.liu.rpc.common.model.RpcRequest;
 import com.liu.rpc.common.model.RpcResponse;
+import com.liu.rpc.core.code.CommonDecoder;
+import com.liu.rpc.core.code.CommonEncoder;
+import com.liu.rpc.core.code.CommonSerializerImpl;
+import com.liu.rpc.core.handle.NettyClientHandler;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,11 +21,31 @@ import org.slf4j.LoggerFactory;
  * @author knuslus
  */
 @AllArgsConstructor
-public class NettyClient implements RpcClient{
+@NoArgsConstructor
+public class NettyClient implements RpcClient {
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
     private String ip;
     private int port;
     private static final Bootstrap bootstrap = new Bootstrap();
+
+    static {
+        EventLoopGroup eventExecutors = new NioEventLoopGroup();
+        bootstrap.group(eventExecutors)
+                .channel(NioSocketChannel.class)
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .handler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        ChannelPipeline pipeline = socketChannel.pipeline();
+                        pipeline.addLast(new CommonDecoder())
+                                .addLast(new CommonEncoder(new CommonSerializerImpl()))
+                                .addLast(new NettyClientHandler());
+                    }
+                });
+
+
+    }
+
     @Override
     public Object sendRequest(RpcRequest rpcRequest) {
         try {

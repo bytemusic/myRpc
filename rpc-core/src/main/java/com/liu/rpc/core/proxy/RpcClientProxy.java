@@ -1,5 +1,6 @@
 package com.liu.rpc.core.proxy;
 
+import com.liu.rpc.core.client.NettyClient;
 import com.liu.rpc.core.client.SocketClient;
 import com.liu.rpc.common.model.RpcRequest;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,12 @@ public class RpcClientProxy implements InvocationHandler {
     private String ip;
 
     private int port;
+
+    private final NettyClient nettyClient;
+
+    public RpcClientProxy (NettyClient nettyClient) {
+        this.nettyClient = nettyClient;
+    }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //执行逻辑，生成一个rpcClient对象，向服务端发送请求，
@@ -29,7 +36,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .build();
         //用RpcClient发送请求
         SocketClient rpcClient = new SocketClient(ip, port);
-        return rpcClient.sendRequest(rpcRequest);
+        return nettyClient.sendRequest(rpcRequest);
     }
 
     /**
