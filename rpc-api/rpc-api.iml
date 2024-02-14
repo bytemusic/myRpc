@@ -59,6 +59,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: io.netty:netty-resolver-dns-native-macos:osx-aarch_64:4.1.104.Final" level="project" />
   </component>
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="47d5a795-57b8-457b-aba4-ee866f3fc901" />
+    <option name="uniqueId" value="9e794a1a-b460-42a8-bd02-e88d1517c9e8" />
   </component>
 </module>
