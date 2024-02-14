@@ -12,6 +12,7 @@
         <module>rpc-core</module>
         <module>rpc-common</module>
         <module>rpc-api</module>
+        <module>rpc-test01</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
