@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>rpc-test</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.5.0</version>
     <name>rpc-test</name>
     <description>rpc-test</description>
 
@@ -22,12 +22,12 @@
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>rpc-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.5.0</version>
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>rpc-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.5.0</version>
         </dependency>
 
         <dependency>
