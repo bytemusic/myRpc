@@ -14,9 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RegisterManager implements ServiceRegister {
     private static final Logger logger = LoggerFactory.getLogger(RegisterManager.class);
-    //存放注册的服务容器
+    /**
+     * 存放注册的服务容器
+     */
     Map<String, Object> serviceMap = new ConcurrentHashMap<>();
-    //可以把注册成功的服务保存在一个set集合里面，保证不重复
+    /**
+     * 可以把注册成功的服务保存在一个set集合里面，保证不重复
+     */
     Set<String> serviceSet = new HashSet<>();
 
     @Override
