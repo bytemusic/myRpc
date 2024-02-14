@@ -1,6 +1,5 @@
 package com.liu.rpc.core.serivce;
 
-import org.springframework.stereotype.Service;
 
 /**
  * @author knuslus
