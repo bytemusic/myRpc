@@ -38,14 +38,16 @@ public class NettyServer implements RpcServer{
                     }
                 });
         try {
+            logger.info("NettyServer.start ......");
             ChannelFuture sync = serverBootstrap.bind(port).sync();
             sync.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            logger.warn("NettyServer.start error {}", e);
+            logger.warn("NettyServer.start warm {}", e.getMessage());
             throw new RuntimeException(e);
         } finally {
             eventLoopGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
+            logger.info("NettyServer.start finally ......");
         }
     }
 
