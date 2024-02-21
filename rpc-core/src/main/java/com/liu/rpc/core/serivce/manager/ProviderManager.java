@@ -1,6 +1,6 @@
 package com.liu.rpc.core.serivce.manager;
 
-import com.liu.rpc.core.serivce.ServiceRegister;
+import com.liu.rpc.core.serivce.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author knuslus
  */
-public class RegisterManager implements ServiceRegister {
-    private static final Logger logger = LoggerFactory.getLogger(RegisterManager.class);
+public class ProviderManager implements ServiceProvider {
+    private static final Logger logger = LoggerFactory.getLogger(ProviderManager.class);
     /**
      * 存放注册的服务容器
      */

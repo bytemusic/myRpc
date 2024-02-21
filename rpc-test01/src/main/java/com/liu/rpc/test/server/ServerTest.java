@@ -1,8 +1,8 @@
 package com.liu.rpc.test.server;
 
 import com.liu.rpc.api.service.RpcClient;
-import com.liu.rpc.core.serivce.ServiceRegister;
-import com.liu.rpc.core.serivce.manager.RegisterManager;
+import com.liu.rpc.core.serivce.ServiceProvider;
+import com.liu.rpc.core.serivce.manager.ProviderManager;
 import com.liu.rpc.core.server.SocketServer;
 
 /**
@@ -13,10 +13,10 @@ public class ServerTest {
 
     public static void main(String[] args) {
         RpcClient server = new HelloServer();
-        ServiceRegister serviceRegister = new RegisterManager();
+        ServiceProvider serviceProvider = new ProviderManager();
         //注册服务
-        serviceRegister.registerService(server);
-        SocketServer socketServer = new SocketServer(serviceRegister);
+        serviceProvider.registerService(server);
+        SocketServer socketServer = new SocketServer(serviceProvider);
         //启动服务
         socketServer.start(server, 90);
     }

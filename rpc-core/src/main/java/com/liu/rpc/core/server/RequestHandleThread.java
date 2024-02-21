@@ -2,17 +2,13 @@ package com.liu.rpc.core.server;
 
 import com.liu.rpc.common.model.RpcRequest;
 import com.liu.rpc.common.model.RpcResponse;
-import com.liu.rpc.core.serivce.ServiceRegister;
-import com.liu.rpc.core.serivce.manager.RegisterManager;
-import lombok.AllArgsConstructor;
+import com.liu.rpc.core.serivce.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.Socket;
 
 /**
@@ -26,12 +22,12 @@ public class RequestHandleThread implements Runnable {
 
     private RequestHandle requestHandle;
 
-    private ServiceRegister serviceRegister;
+    private ServiceProvider serviceProvider;
 
-    public RequestHandleThread(Socket socket, RequestHandle requestHandle, ServiceRegister serviceRegister) {
+    public RequestHandleThread(Socket socket, RequestHandle requestHandle, ServiceProvider serviceProvider) {
         this.socket = socket;
         this.requestHandle = requestHandle;
-        this.serviceRegister = serviceRegister;
+        this.serviceProvider = serviceProvider;
     }
 
     //接收RpcRequest对象并回传RpcRespond对象
@@ -40,7 +36,7 @@ public class RequestHandleThread implements Runnable {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())) {
             RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
-            Object service = serviceRegister.getService(rpcRequest.getInterfaceName());
+            Object service = serviceProvider.getService(rpcRequest.getInterfaceName());
             Object invoke = RequestHandle.handel(rpcRequest, service);
             objectOutputStream.writeObject(RpcResponse.success(invoke, 2342L));
             objectOutputStream.flush();

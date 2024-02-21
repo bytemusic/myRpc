@@ -1,8 +1,8 @@
 package com.liu.rpc.test.server;
 
 import com.liu.rpc.api.service.RpcClient;
-import com.liu.rpc.core.serivce.ServiceRegister;
-import com.liu.rpc.core.serivce.manager.RegisterManager;
+import com.liu.rpc.core.serivce.ServiceProvider;
+import com.liu.rpc.core.serivce.manager.ProviderManager;
 import com.liu.rpc.core.server.NettyServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +17,8 @@ public class NettyServerTest {
 
     public static void main(String[] args) {
         RpcClient server = new HelloServer();
-        ServiceRegister serviceRegister = new RegisterManager();
-        serviceRegister.registerService(server);
+        ServiceProvider serviceProvider = new ProviderManager();
+        serviceProvider.registerService(server);
         logger.info("注册服务");
         NettyServer nettyServer = new NettyServer();
         logger.info("启动服务");

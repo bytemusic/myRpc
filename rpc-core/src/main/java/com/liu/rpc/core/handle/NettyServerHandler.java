@@ -1,7 +1,7 @@
 package com.liu.rpc.core.handle;
 
 import com.liu.rpc.common.model.RpcRequest;
-import com.liu.rpc.core.serivce.ServiceRegister;
+import com.liu.rpc.core.serivce.ServiceProvider;
 import com.liu.rpc.core.server.RequestHandle;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -14,13 +14,13 @@ import io.netty.util.ReferenceCountUtil;
  */
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
-    private static ServiceRegister serviceRegister;
+    private static ServiceProvider serviceProvider;
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcRequest rpcRequest) throws Exception {
         try {
             String interfaceName = rpcRequest.getInterfaceName();
-            Object service = serviceRegister.getService(interfaceName);
+            Object service = serviceProvider.getService(interfaceName);
             if (service != null) {
                 //对对象进行动态代理，返回处理结果
                 Object handel = RequestHandle.handel(rpcRequest, service);

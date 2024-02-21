@@ -1,6 +1,6 @@
 package com.liu.rpc.core.server;
 
-import com.liu.rpc.core.serivce.ServiceRegister;
+import com.liu.rpc.core.serivce.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,12 +17,12 @@ import java.util.concurrent.*;
 public class SocketServer implements RpcServer{
     private final ExecutorService threadPool;
     private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
-    private ServiceRegister serviceRegister;
+    private ServiceProvider serviceProvider;
 
     private RequestHandle requestHandle;
 
-    public SocketServer(ServiceRegister serviceRegister) {
-        this.serviceRegister = serviceRegister;
+    public SocketServer(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
         int corePoolSize = 5;
         int maximumPoolSize = 50;
         long keepAliveTime = 60;
@@ -38,7 +38,7 @@ public class SocketServer implements RpcServer{
             Socket socket;
             while ((socket = serverSocket.accept()) != null) {
                 logger.info("客户端连接！Ip为：{}", socket.getInetAddress());
-                threadPool.execute(new RequestHandleThread(socket, requestHandle, serviceRegister));
+                threadPool.execute(new RequestHandleThread(socket, requestHandle, serviceProvider));
             }
         } catch (IOException e) {
             logger.error("连接时有错误发生：", e);
