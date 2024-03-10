@@ -30,7 +30,7 @@ public class WorkThread implements Runnable{
 
 
     /**
-     * 线程自动执行方法？
+     * 线程自动执行方法
      * 接收RpcRequest对象并回传RpcRespond对象
      */
     @Override
