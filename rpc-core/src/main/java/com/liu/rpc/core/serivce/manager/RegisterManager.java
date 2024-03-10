@@ -10,37 +10,43 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 注册多个服务具体实现
  * @author knuslus
  */
 public class RegisterManager implements ServiceRegister {
     private static final Logger logger = LoggerFactory.getLogger(RegisterManager.class);
 
     /**
-     * 存放注册的服务容器
+     * 存放注册的服务容器，可能有多个服务同时注册
      */
-    Map<String, Object> serviceMap = new ConcurrentHashMap<>();
+    private final Map<String, Object> serviceMap = new ConcurrentHashMap<>();
 
     /**
      * 可以把注册成功的服务保存在一个set集合里面，保证不重复
      */
-    Set<String> serviceSet = new HashSet<>();
+    private final Set<String> serviceSet = ConcurrentHashMap.newKeySet();
 
     @Override
-    public <T> void registerService(T service) {
+    public synchronized <T> void registerService(T service) {
         //注册服务，有服务ip,
+        String canonicalName = service.getClass().getCanonicalName();
+        //如果已经注册过，直接返回
+        if (serviceSet.contains(canonicalName))
+            return;
+        //再放入会重新覆盖
+        serviceSet.add(canonicalName);
+        //接口列表？
         Class<?>[] interfaces = service.getClass().getInterfaces();
+        if (interfaces.length == 0) {
+            throw new RuntimeException("interfaces.length == 0");
+        }
         for (Class<?> serviceName : interfaces) {
-            if (serviceMap.containsKey(serviceName.getCanonicalName())) {
-                return;
-            } else {
-                logger.info("{}注册服务", serviceName);
-                serviceMap.put(serviceName.getCanonicalName(), service);
-            }
+            serviceMap.put(serviceName.getCanonicalName(), service);
         }
     }
 
     @Override
-    public Object getService(String serviceName) {
+    public synchronized Object getService(String serviceName) {
         Object service = serviceMap.get(serviceName);
         if (service == null) {
             throw new RuntimeException("服务不存在");

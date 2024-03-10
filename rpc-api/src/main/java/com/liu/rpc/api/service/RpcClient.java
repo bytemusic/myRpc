@@ -13,4 +13,12 @@ public interface RpcClient {
      * @return
      */
     String firstRpcMethod(FirstRpcModel firstRpcModel);
+
+    /**
+     * 根据订单号和商户id判断是否为医保订单
+     * @param tradeId
+     * @param sellerId
+     * @return
+     */
+    String secondRpcMethod(String tradeId,long sellerId);
 }

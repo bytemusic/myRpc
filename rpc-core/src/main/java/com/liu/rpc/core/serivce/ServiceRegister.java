@@ -2,6 +2,7 @@ package com.liu.rpc.core.serivce;
 
 
 /**
+ * 服务注册表，多个服务注册
  * @author knuslus
  */
 public interface ServiceRegister {

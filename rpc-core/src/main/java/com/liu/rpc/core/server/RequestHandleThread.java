@@ -19,7 +19,6 @@ import java.net.Socket;
  * @author knuslus
  */
 public class RequestHandleThread implements Runnable {
-
     private static final Logger logger = LoggerFactory.getLogger(RequestHandleThread.class);
 
     private Socket socket;
