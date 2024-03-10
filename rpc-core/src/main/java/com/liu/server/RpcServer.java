@@ -28,8 +28,8 @@ public class RpcServer {
 
     /**
      *
-     * @param service
-     * @param port
+     * @param service 注册服务名
+     * @param port 端口
      */
     public void register(Object service, int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
