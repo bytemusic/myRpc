@@ -33,7 +33,7 @@ public class RegisterManager implements ServiceRegister {
         //如果已经注册过，直接返回
         if (serviceSet.contains(canonicalName))
             return;
-        //再放入会重新覆盖
+        //不存在再放入
         serviceSet.add(canonicalName);
         //接口列表？
         Class<?>[] interfaces = service.getClass().getInterfaces();

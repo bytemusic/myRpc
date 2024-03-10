@@ -26,5 +26,8 @@
         }
         但是后续又报这个错误，不是因为 调用了objectInputStream.available() 把返回参数封装成RpcResponse才能解决 莫名其妙
     4. 为什么客户端第一次请求传参方法名称为toSting方法，暂时不知道
-
-
+### `dev_1_2_0 完成可以注册多个服务的rpc`
+1. 原来注册一个服务时，直接调用rpcServer的register注册服务，现在需要注册多个服务，就需要一个注册表，保存多个服务。然后向注册表里注册服务。
+注册好服务后，调用rpcServer的start方法，启动服务。start方法和原来run方法逻辑一样，就是RpcServer传参由原来的一个服务变为注册表。注册服务需要
+一个ConcurrentHashMap,一个ConcurrentHashMap.newKeySet,注册服务（getClass().getCanonicalName()）先判断服务是否在ConcurrentHashMap.newKeySet中存在，存在直接返回，不存在，
+遍历service.getClass().getInterfaces()，然后将service.getClass().getInterfaces().getCanonicalName()放入ConcurrentHashMap集合

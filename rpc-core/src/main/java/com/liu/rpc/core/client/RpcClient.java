@@ -24,7 +24,7 @@ public class RpcClient {
             objectOutputStream.writeObject(rpcRequest);
             objectOutputStream.flush();
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            //无法读取
+            //无法读取的原因是RpcRequest的paramType应该为Class<?>[]
             Object response = ((RpcResponse)objectInputStream.readObject()).getModel();
             return response;
         } catch (Exception e) {

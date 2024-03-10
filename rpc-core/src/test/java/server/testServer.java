@@ -15,10 +15,12 @@ public class testServer {
     public static void main(String[] args) {
         RpcClient server = new helloServer();
         PartnerService partnerService = new PartnerServiceImpl();
+        //初始化注册表
         ServiceRegister serviceRegister = new RegisterManager();
         //注册服务
         serviceRegister.registerService(server);
         serviceRegister.registerService(partnerService);
+
         RpcServer rpcServer = new RpcServer(serviceRegister);
         //启动服务
         rpcServer.start(90);

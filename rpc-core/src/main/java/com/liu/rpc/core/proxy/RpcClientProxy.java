@@ -31,8 +31,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .build();
         //用RpcClient发送请求
         RpcClient rpcClient = new RpcClient();
-        Object repsonse = rpcClient.sendRequest(rpcRequest, ip, port);
-        return repsonse;
+        return rpcClient.sendRequest(rpcRequest, ip, port);
     }
 
     /**
