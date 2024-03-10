@@ -42,10 +42,10 @@ public class RequestHandleThread implements Runnable {
             RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
             Object service = serviceRegister.getService(rpcRequest.getInterfaceName());
             Object invoke = RequestHandle.handel(rpcRequest, service);
-            objectOutputStream.writeObject(RpcResponse.success(invoke, 2342L));
+            objectOutputStream.writeObject(RpcResponse.success(invoke));
             objectOutputStream.flush();
         } catch (ClassNotFoundException | IOException e) {
-            logger.warn("RequestHandleThread.run error,e{}",e);
+            logger.warn("RequestHandleThread.run error",e);
             throw new RuntimeException(e);
         }
     }

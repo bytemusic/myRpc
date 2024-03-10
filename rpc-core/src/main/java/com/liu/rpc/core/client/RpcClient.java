@@ -1,6 +1,7 @@
 package com.liu.rpc.core.client;
 
 import com.liu.rpc.common.model.RpcRequest;
+import com.liu.rpc.common.model.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ public class RpcClient {
             objectOutputStream.flush();
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             //无法读取
-            Object response = objectInputStream.readObject();
+            Object response = ((RpcResponse)objectInputStream.readObject()).getModel();
             return response;
         } catch (Exception e) {
             logger.warn("RpcClient.sendRequest warnning ", e);

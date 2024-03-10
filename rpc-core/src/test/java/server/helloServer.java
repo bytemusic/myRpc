@@ -1,4 +1,4 @@
-package com.liu.rpc.test.server;
+package server;
 
 import com.liu.rpc.api.model.FirstRpcModel;
 import com.liu.rpc.api.service.RpcClient;

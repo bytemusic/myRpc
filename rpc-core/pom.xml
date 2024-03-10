@@ -74,6 +74,12 @@
             <artifactId>xnio-nio</artifactId>
             <version>3.8.8.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>rpc-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 	<build>

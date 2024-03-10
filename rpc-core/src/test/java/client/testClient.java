@@ -1,8 +1,8 @@
-package com.liu.rpc.test.client;
+package client;
 
 import com.liu.rpc.api.model.FirstRpcModel;
-import com.liu.rpc.core.proxy.RpcClientProxy;
 import com.liu.rpc.api.service.RpcClient;
+import com.liu.rpc.core.proxy.RpcClientProxy;
 
 /**
  * 客户端测试

@@ -23,13 +23,16 @@ public class RpcClientProxy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //执行逻辑，生成一个rpcClient对象，向服务端发送请求，
         RpcRequest rpcRequest = RpcRequest.builder()
+                .ip(ip)
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .param(args)
+                .paramType(method.getParameterTypes())
                 .build();
         //用RpcClient发送请求
         RpcClient rpcClient = new RpcClient();
-        return rpcClient.sendRequest(rpcRequest, ip, port);
+        Object repsonse = rpcClient.sendRequest(rpcRequest, ip, port);
+        return repsonse;
     }
 
     /**

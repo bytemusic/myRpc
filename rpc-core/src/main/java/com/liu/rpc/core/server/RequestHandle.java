@@ -15,17 +15,12 @@ public class RequestHandle {
 
     //通过代理调用的方法抽取出来
     public static Object handel(RpcRequest rpcRequest, Object service) {
-        Method method = null;
+        Object invoke;
         try {
-            method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamType());
-        } catch (NoSuchMethodException e) {
-            logger.warn("RequestHandle.handle error e:{}", e.getMessage());
-            throw new RuntimeException(e);
-        }
-        Object invoke = null;
-        try {
+            Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamType());
             invoke = method.invoke(service, rpcRequest.getParam());
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            logger.warn("RequestHandle.handle error e:", e);
             throw new RuntimeException(e);
         }
         return invoke;

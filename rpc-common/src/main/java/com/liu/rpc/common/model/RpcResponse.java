@@ -12,14 +12,11 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
-    /**
-     * 请求id
-     */
-    private long requestId;
+
     /**
      * 返回码
      */
-    private int code;
+    private Integer code;
 
     /**
      * 返回码信息
@@ -31,11 +28,8 @@ public class RpcResponse<T> implements Serializable {
      */
     private T model;
 
-    public void setRequestId(long requestId) {
-        this.requestId = requestId;
-    }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
@@ -48,16 +42,15 @@ public class RpcResponse<T> implements Serializable {
     }
 
 
-    public static <T> RpcResponse<T> success(T model, long requestId) {
+    public static <T> RpcResponse<T> success(T model) {
         RpcResponse rpcResponse = new RpcResponse();
-        rpcResponse.setRequestId(requestId);
         rpcResponse.setCode(200);
         rpcResponse.setMessage("请求成功");
         rpcResponse.setModel(model);
         return rpcResponse;
     }
 
-    public static <T> RpcResponse<T> fail(long requestId) {
+    public static <T> RpcResponse<T> fail() {
         RpcResponse rpcResponse = new RpcResponse();
         rpcResponse.setCode(500);
         rpcResponse.setMessage("请求失败");
