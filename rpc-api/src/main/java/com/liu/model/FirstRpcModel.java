@@ -18,16 +18,16 @@ public class FirstRpcModel implements Serializable {
     private int id;
 
     /**
-     * 请求信息
+     * 请求网站的URL
      */
-    private String message;
+    private String url;
 
-    public FirstRpcModel(int id, String message) {
+    public FirstRpcModel(int id, String url) {
         this.id = id;
-        this.message = message;
+        this.url = url;
     }
     public String getMessage() {
-        return message;
+        return url;
     }
 
     public int getId() {

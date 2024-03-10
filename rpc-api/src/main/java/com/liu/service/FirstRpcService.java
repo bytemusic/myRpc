@@ -8,7 +8,7 @@ import com.liu.model.FirstRpcModel;
  */
 public interface FirstRpcService {
     /**
-     * 需要服务端实现的方法
+     * 服务提供者的第一个方法
      * @param firstRpcModel 请求体
      * @return 返回参数
      */

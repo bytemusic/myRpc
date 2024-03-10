@@ -11,14 +11,15 @@ import org.slf4j.LoggerFactory;
  * 客户端测试
  * @author knuslus
  */
-public class TestClient {
-    private static final Logger logger = LoggerFactory.getLogger(TestClient.class);
+public class RpcConsumerTest {
+    private static final String ip = "127.0.0.1";
+    private static final int port = 90;
+    private static final Logger logger = LoggerFactory.getLogger(RpcConsumerTest.class);
     public static void main(String[] args) {
-        RpcConsumerProxy rpcConsumerProxy = new RpcConsumerProxy("127.0.0.1", 90);
+        RpcConsumerProxy rpcConsumerProxy = new RpcConsumerProxy(ip, port);
         FirstRpcService proxyClass = rpcConsumerProxy.getProxyClass(FirstRpcService.class);
-        FirstRpcModel firstRpcModel = new FirstRpcModel(1, "发送第一条信息");
-        logger.info("before testClient.proxyClass.firstRpcModel");
-        String message = proxyClass.firstRpcMethod(firstRpcModel);
+        logger.info("服务消费者：{} 调用方法firstRpcMethod", proxyClass);
+        String message = proxyClass.firstRpcMethod(new FirstRpcModel(1, "www.baidu.com"));
         if (StringUtils.isNotBlank(message)) {
             logger.info("message :{}", message);
         } else {
