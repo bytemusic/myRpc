@@ -8,6 +8,7 @@ WorkThread实现Runnable接口，具体执行事务在run方法里。
 
 3. 定义一个服务消费者（Client）代理类，获取消费类的代理对象（代理消费类的getProxyClass方法），调用消费类的方法，然后会进去代理消费类的invoke方法
    1. invoke方法会封装RpcRequest类（传参接口名称，方法名称，方法参数），生成请求类，调用请求类的请求方法
-4. 定义一个在RpcService定义Rpc请求方法，首先建立Socket连接，请求数据 
-5. 定义一个代理方法，向服务端发送请求 
-6. 创建一个线程池，处理多个请求
+   2. 请求方法sendRequest，建立Socket连接，调用Socket的输出流，转化为ObjectOutputStream；调用ObjectOutputStream的writeObject方法，将RpcRequest传输给服务端。
+   3. 调用ObjectOutputStream的flush方法
+   4. 调用Socket的输入流，获取服务端的响应，转化为ObjectInputStream；调用ObjectInputStream的readObject方法，返回。
+
