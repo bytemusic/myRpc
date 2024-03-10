@@ -6,10 +6,10 @@ import com.liu.server.RpcServer;
  * 服务端测试
  * @author knuslus
  */
-public class testServer {
+public class TestServer {
 
     public static void main(String[] args) {
-        helloServer server = new helloServer();
+        HelloServer server = new HelloServer();
         RpcServer rpcServer = new RpcServer();
         rpcServer.register(server, 90);
     }

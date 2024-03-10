@@ -24,7 +24,11 @@ public class WorkThread implements Runnable{
 
     private Socket socket;
 
-    //接收RpcRequest对象并回传RpcRespond对象
+
+    /**
+     * 线程自动执行方法？
+     * 接收RpcRequest对象并回传RpcRespond对象
+     */
     @Override
     public void run() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());

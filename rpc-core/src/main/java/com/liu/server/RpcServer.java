@@ -26,6 +26,11 @@ public class RpcServer {
         threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, workingQueue, threadFactory);
     }
 
+    /**
+     *
+     * @param service
+     * @param port
+     */
     public void register(Object service, int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             logger.info("服务器正在启动...");

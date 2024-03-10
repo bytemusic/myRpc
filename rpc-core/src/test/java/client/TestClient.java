@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
  * 客户端测试
  * @author knuslus
  */
-public class testClient {
-    private static final Logger logger = LoggerFactory.getLogger(testClient.class);
+public class TestClient {
+    private static final Logger logger = LoggerFactory.getLogger(TestClient.class);
     public static void main(String[] args) {
         RpcClientProxy rpcClientProxy = new RpcClientProxy("127.0.0.1", 90);
         RpcClient proxyClass = rpcClientProxy.getProxyClass(RpcClient.class);
