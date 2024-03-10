@@ -49,19 +49,20 @@ public class WorkThread implements Runnable{
                 logger.info("service is null");
 
             } catch (ClassNotFoundException e) {
-                logger.warn("处理请求方法失败");
+                logger.warn("处理请求方法失败",e);
                 throw new RuntimeException(e);
             } catch (NoSuchMethodException e) {
-                logger.warn("处理请求方法失败");
+                logger.warn("处理请求方法失败",e);
                 throw new RuntimeException(e);
             } catch (InvocationTargetException e) {
-                logger.warn("处理请求方法失败");
+                logger.warn("处理请求方法失败",e);
                 throw new RuntimeException(e);
             } catch (IllegalAccessException e) {
-                logger.warn("处理请求方法失败");
+                logger.warn("处理请求方法失败",e);
                 throw new RuntimeException(e);
             }
         } catch (IOException e) {
+            logger.warn("处理请求方法失败",e);
             throw new RuntimeException(e);
         }
     }

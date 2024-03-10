@@ -2,6 +2,7 @@ package com.liu.proxy;
 
 import com.liu.client.RpcConsumer;
 import com.liu.model.RpcRequest;
+import com.liu.model.RpcResponse;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.InvocationHandler;
@@ -27,10 +28,11 @@ public class RpcConsumerProxy implements InvocationHandler {
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .param(args)
+                .paramType(method.getParameterTypes())
                 .build();
         //用RpcClient发送请求
         RpcConsumer rpcConsumer = new RpcConsumer();
-        return rpcConsumer.sendRequest(rpcRequest, ip, port);
+        return ((RpcResponse<?>)rpcConsumer.sendRequest(rpcRequest, ip, port)).getModel();
     }
 
     /**

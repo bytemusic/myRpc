@@ -9,29 +9,24 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 客户端测试
+ *
  * @author knuslus
  */
 public class RpcConsumerTest {
     private static final String ip = "127.0.0.1";
     private static final int port = 90;
     private static final Logger logger = LoggerFactory.getLogger(RpcConsumerTest.class);
+
     public static void main(String[] args) {
         RpcConsumerProxy rpcConsumerProxy = new RpcConsumerProxy(ip, port);
         FirstRpcService proxyClass = rpcConsumerProxy.getProxyClass(FirstRpcService.class);
-        if (proxyClass != null) {
-            logger.info("服务消费者调用远程方法firstRpcMethod");
-            String message = proxyClass.firstRpcMethod(new FirstRpcModel(1, "www.baidu.com"));
-            if (StringUtils.isNotBlank(message)) {
-                logger.info("message :{}", message);
-            } else {
-                logger.info("message is null");
-            }
+        logger.info("服务消费者调用远程方法firstRpcMethod");
+        String message = proxyClass.firstRpcMethod(new FirstRpcModel(1, "www.baidu.com"));
+        if (StringUtils.isNotBlank(message)) {
+            logger.info("message :{}", message);
         } else {
-            logger.info("服务消费者生产的代理对象为null");
+            logger.info("message is null");
         }
-
-
-
-
     }
+
 }

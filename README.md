@@ -15,5 +15,5 @@ WorkThread实现Runnable接口，具体执行事务在run方法里。
    调用ObjectOutputStream的writeObject方法，将RpcRequest传输给服务端。 调用ObjectOutputStream的flush方法
    3. 调用Socket的输入流，获取服务端的响应，转化为ObjectInputStream；调用ObjectInputStream的readObject方法，返回。
 4. 遇到难题
-   1. 只建立连接，中间处理流程报错，调用远程方法报错.服务端找不到客户端调用的方法
+   1. 只建立连接，中间处理流程报错，调用远程方法报错.服务端找不到客户端调用的方法,应该是请求参数封装有问题。确实是,在本次提交解决，RpcConsumerProxy
 
