@@ -20,4 +20,11 @@ WorkThread实现Runnable接口，具体执行事务在run方法里。
       1. 第一次请求端传参方法名称为toSting方法（RpcRequest(ip=127.0.0.1, interfaceName=java.lang.Object, methodName=toString, param=null, paramType=[])）,
       导致服务端处理不了，客户端再次请求，服务端判断socket是否正在建立连接，此时莫名奇妙，连接断开.
       解决了上面的问题，一是ObjectInputStream的位置，二是RpcConsumerProxy调用sendRequest的返回参数
+   3.  Broken pipe不是ObjectInputStream的位置原因，也不是返回参数问题，是ObjectInputStream 调用了objectInputStream.available()判断是否有输出流
+         if(objectInputStream.available() == 0) {
+         logger.warn("获取服务端返回数据为空");
+         }
+        但是后续又报这个错误，不是因为 调用了objectInputStream.available() 把返回参数封装成RpcResponse才能解决 莫名其妙
+   4. 为什么客户端第一次请求传参方法名称为toSting方法，暂时不知道
+
 

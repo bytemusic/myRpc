@@ -41,7 +41,7 @@ public class WorkThread implements Runnable {
             Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamType());
             Object invoke = method.invoke(service, rpcRequest.getParam());
             //原来把返回结果封装成RpcResponse，服务端返回数据，客户端读取数据报错
-            objectOutputStream.writeObject(invoke);
+            objectOutputStream.writeObject(RpcResponse.success(invoke));
             objectOutputStream.flush();
 
         } catch (ClassNotFoundException | IOException | NoSuchMethodException | InvocationTargetException |

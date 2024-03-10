@@ -1,6 +1,7 @@
 package com.liu.client;
 
 import com.liu.model.RpcRequest;
+import com.liu.model.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,7 @@ public class RpcConsumer {
             // 确保将数据发送给服务端
             objectOutputStream.flush();
             // 获取输入流，并使用 ObjectInputStream 读取服务端的响应
-            return objectInputStream.readObject();
+            return ((RpcResponse)objectInputStream.readObject()).getModel();
         } catch (Exception e) {
             // 发生异常时，记录警告信息并返回 null
             logger.warn("RpcClient.sendRequest warning: {}", e);
