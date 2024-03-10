@@ -1,16 +1,14 @@
 package server;
 
 import com.liu.model.FirstRpcModel;
-import com.liu.service.RpcClient;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.liu.service.RpcConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author knuslus
  */
-public class HelloServer implements RpcClient {
+public class HelloServer implements RpcConsumer {
     private static final Logger logger = LoggerFactory.getLogger(HelloServer.class);
 
     @Override

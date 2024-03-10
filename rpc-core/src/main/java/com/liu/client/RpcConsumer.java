@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * 向服务端发送请求
+ * 客户端向服务端发送请求
  *
  * @author knuslus
  */
@@ -17,7 +17,7 @@ public class RpcConsumer {
     private static final Logger logger = LoggerFactory.getLogger(RpcConsumer.class);
 
     public Object sendRequest(RpcRequest rpcRequest, String host, int port) {
-        logger.info("RpcClient.sendRequest rpcRequest:{}, host:{} ip:{}", rpcRequest, host, port);
+        logger.info("RpcConsumer.sendRequest rpcRequest:{}, host:{} ip:{}", rpcRequest, host, port);
         try(Socket socket = new Socket(host, port)) {
             // 获取输出流，并使用 ObjectOutputStream 将对象序列化发送给服务端
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
