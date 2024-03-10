@@ -2,6 +2,8 @@ package server;
 
 import com.liu.model.FirstRpcModel;
 import com.liu.service.RpcClient;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

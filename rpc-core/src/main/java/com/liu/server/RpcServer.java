@@ -37,9 +37,7 @@ public class RpcServer {
             Socket socket;
             while((socket = serverSocket.accept()) != null) {
                 logger.info("客户端连接！Ip为：{}", socket.getInetAddress());
-                threadPool.execute(() -> {
-                    logger.info("注册服务");
-                });
+                threadPool.execute(new WorkThread(service,socket));
             }
         } catch (IOException e) {
             logger.error("连接时有错误发生：", e);

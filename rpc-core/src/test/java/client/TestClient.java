@@ -1,8 +1,9 @@
 package client;
 
 import com.liu.model.FirstRpcModel;
-import com.liu.proxy.RpcClientProxy;
+import com.liu.proxy.RpcConsumerProxy;
 import com.liu.service.RpcClient;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,13 +14,18 @@ import org.slf4j.LoggerFactory;
 public class TestClient {
     private static final Logger logger = LoggerFactory.getLogger(TestClient.class);
     public static void main(String[] args) {
-        RpcClientProxy rpcClientProxy = new RpcClientProxy("127.0.0.1", 90);
-        RpcClient proxyClass = rpcClientProxy.getProxyClass(RpcClient.class);
+        RpcConsumerProxy rpcConsumerProxy = new RpcConsumerProxy("127.0.0.1", 90);
+        RpcClient proxyClass = rpcConsumerProxy.getProxyClass(RpcClient.class);
         FirstRpcModel firstRpcModel = new FirstRpcModel(1, "发送第一条信息");
         logger.info("before testClient.proxyClass.firstRpcModel");
         String message = proxyClass.firstRpcMethod(firstRpcModel);
-        logger.info("after testClient.proxyClass.firstRpcMethod");
-        System.out.println(message);
+        if (StringUtils.isNotBlank(message)) {
+            logger.info("message :{}", message);
+        } else {
+            logger.info("message is null");
+        }
+
+
 
     }
 }

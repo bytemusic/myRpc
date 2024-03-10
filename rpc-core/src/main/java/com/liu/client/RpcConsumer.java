@@ -13,8 +13,8 @@ import java.net.Socket;
  *
  * @author knuslus
  */
-public class RpcClient {
-    private static final Logger logger = LoggerFactory.getLogger(RpcClient.class);
+public class RpcConsumer {
+    private static final Logger logger = LoggerFactory.getLogger(RpcConsumer.class);
 
     public Object sendRequest(RpcRequest rpcRequest, String host, int port) {
         logger.info("RpcClient.sendRequest rpcRequest:{}, host:{} ip:{}", rpcRequest, host, port);

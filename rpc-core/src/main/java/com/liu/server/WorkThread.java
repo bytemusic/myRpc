@@ -2,6 +2,8 @@ package com.liu.server;
 
 import com.liu.model.RpcRequest;
 import com.liu.model.RpcResponse;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,8 @@ import java.net.Socket;
  *
  * @author knuslus
  */
+@AllArgsConstructor
+@NoArgsConstructor
 public class WorkThread implements Runnable{
 
     private static final Logger logger = LoggerFactory.getLogger(WorkThread.class);

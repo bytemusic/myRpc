@@ -1,6 +1,6 @@
 package com.liu.proxy;
 
-import com.liu.client.RpcClient;
+import com.liu.client.RpcConsumer;
 import com.liu.model.RpcRequest;
 import lombok.AllArgsConstructor;
 
@@ -14,7 +14,7 @@ import java.lang.reflect.Proxy;
  * 代理实现接口的类使用jdk代理
  */
 @AllArgsConstructor
-public class RpcClientProxy implements InvocationHandler {
+public class RpcConsumerProxy implements InvocationHandler {
 
     private String ip;
 
@@ -28,8 +28,8 @@ public class RpcClientProxy implements InvocationHandler {
                 .param(args)
                 .build();
         //用RpcClient发送请求
-        RpcClient rpcClient = new RpcClient();
-        return rpcClient.sendRequest(rpcRequest, ip, port);
+        RpcConsumer rpcConsumer = new RpcConsumer();
+        return rpcConsumer.sendRequest(rpcRequest, ip, port);
     }
 
     /**
