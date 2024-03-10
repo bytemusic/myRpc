@@ -23,6 +23,7 @@ public class RpcConsumerProxy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //执行逻辑，生成一个rpcClient对象，向服务端发送请求，
         RpcRequest rpcRequest = RpcRequest.builder()
+                .ip(ip)
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .param(args)

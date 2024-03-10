@@ -9,8 +9,8 @@ import com.liu.server.RpcProvider;
 public class RpcProviderTest {
 
     public static void main(String[] args) {
-        FirstRpcServiceImpl server = new FirstRpcServiceImpl();
+        FirstRpcServiceImpl service = new FirstRpcServiceImpl();
         RpcProvider rpcProvider = new RpcProvider();
-        rpcProvider.register(server, 90);
+        rpcProvider.register(service, 90);
     }
 }

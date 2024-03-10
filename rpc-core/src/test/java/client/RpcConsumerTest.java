@@ -18,13 +18,18 @@ public class RpcConsumerTest {
     public static void main(String[] args) {
         RpcConsumerProxy rpcConsumerProxy = new RpcConsumerProxy(ip, port);
         FirstRpcService proxyClass = rpcConsumerProxy.getProxyClass(FirstRpcService.class);
-        logger.info("服务消费者：{} 调用方法firstRpcMethod", proxyClass);
-        String message = proxyClass.firstRpcMethod(new FirstRpcModel(1, "www.baidu.com"));
-        if (StringUtils.isNotBlank(message)) {
-            logger.info("message :{}", message);
+        if (proxyClass != null) {
+            logger.info("服务消费者调用远程方法firstRpcMethod");
+            String message = proxyClass.firstRpcMethod(new FirstRpcModel(1, "www.baidu.com"));
+            if (StringUtils.isNotBlank(message)) {
+                logger.info("message :{}", message);
+            } else {
+                logger.info("message is null");
+            }
         } else {
-            logger.info("message is null");
+            logger.info("服务消费者生产的代理对象为null");
         }
+
 
 
 

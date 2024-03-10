@@ -26,14 +26,18 @@ public class RpcConsumer {
 
             // 获取输入流，并使用 ObjectInputStream 读取服务端的响应
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            Object response = objectInputStream.readObject();
-
-            // 返回服务端的响应
-            return response;
+            if(objectInputStream.available() == 0) {
+                logger.warn("获取服务端返回数据为空");
+            } else {
+                // 返回服务端的响应
+                return objectInputStream.readObject();
+            }
+            return null;
         } catch (Exception e) {
             // 发生异常时，记录警告信息并返回 null
-            logger.warn("RpcClient.sendRequest warning: {}", e.getMessage(), e);
+            logger.warn("RpcClient.sendRequest warning: {}", e);
             return null;
         }
+
     }
 }

@@ -14,11 +14,11 @@ public class FirstRpcServiceImpl implements FirstRpcService {
 
     @Override
     public String firstRpcMethod(FirstRpcModel FirstRpcModel) {
-        String ip = "";
+        String name = "";
         if (FirstRpcModel.getMessage().equals("www.baidu.com")) {
-            ip = "138.27.148.39";
+            name = "百度";
         }
-        logger.info("请求网站的IP为{}", ip);
-        return "服务id为" + FirstRpcModel.getId() + "请求网站的IP为" + ip;
+        logger.info("请求网站:{}的中文名称为{}", FirstRpcModel.getUrl(), name);
+        return "服务id为" + FirstRpcModel.getId() + "请求网站的中文名称为" + name;
     }
 }
