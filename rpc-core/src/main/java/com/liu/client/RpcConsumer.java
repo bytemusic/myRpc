@@ -22,7 +22,6 @@ public class RpcConsumer {
         try(Socket socket = new Socket(host, port)) {
             // 获取输出流，并使用 ObjectOutputStream 将对象序列化发送给服务端
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            //ObjectInputStream放在objectInputStream.readObject()之前，第一次请求是toString方法
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             objectOutputStream.writeObject(rpcRequest);
             // 确保将数据发送给服务端
