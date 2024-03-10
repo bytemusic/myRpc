@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * 定义传输的内容 网络传输需要进行序列化
+ * 将请求方法，实体类放入请求体中
  * @author knuslus
  */
 @Data

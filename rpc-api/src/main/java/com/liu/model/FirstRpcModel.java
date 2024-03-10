@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 用于服务消费者
+ * 请求方法的实体类
  * @author knuslus
  */
 @Data

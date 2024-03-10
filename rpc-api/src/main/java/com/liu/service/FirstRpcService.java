@@ -3,12 +3,12 @@ package com.liu.service;
 import com.liu.model.FirstRpcModel;
 
 /**
- * 请求方法
+ * 服务端向注册中心注册的服务，也是客户端需要调用的服务
  * @author knuslus
  */
-public interface RpcConsumer {
+public interface FirstRpcService {
     /**
-     * 客户端调用服务器代码
+     * 需要服务端实现的方法
      * @param firstRpcModel 请求体
      * @return 返回参数
      */

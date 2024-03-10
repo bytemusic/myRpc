@@ -1,6 +1,6 @@
 package server;
 
-import com.liu.server.RpcServer;
+import com.liu.server.RpcProvider;
 
 /**
  * 服务端测试
@@ -10,7 +10,7 @@ public class TestServer {
 
     public static void main(String[] args) {
         HelloServer server = new HelloServer();
-        RpcServer rpcServer = new RpcServer();
-        rpcServer.register(server, 90);
+        RpcProvider rpcProvider = new RpcProvider();
+        rpcProvider.register(server, 90);
     }
 }

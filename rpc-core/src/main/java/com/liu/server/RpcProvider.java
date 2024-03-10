@@ -9,15 +9,15 @@ import java.net.Socket;
 import java.util.concurrent.*;
 
 /**
- * 服务端接收请求
+ * 服务提供者
  *
  * @author knuslus
  */
-public class RpcServer {
+public class RpcProvider {
     private final ExecutorService threadPool;
-    private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(RpcProvider.class);
 
-    public RpcServer() {
+    public RpcProvider() {
         int corePoolSize = 5;
         int maximumPoolSize = 50;
         long keepAliveTime = 60;
@@ -27,7 +27,7 @@ public class RpcServer {
     }
 
     /**
-     *
+     * 服务提供者注册服务
      * @param service 注册服务名
      * @param port 端口
      */
