@@ -15,12 +15,11 @@ import java.lang.reflect.Method;
 import java.net.Socket;
 
 /**
- *
  * @author knuslus
  */
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkThread implements Runnable{
+public class WorkThread implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(WorkThread.class);
 
@@ -35,34 +34,19 @@ public class WorkThread implements Runnable{
      */
     @Override
     public void run() {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())){
-            try {
-                RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
-                if (service != null) {
-                    logger.info("service is not null");
-                    Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamType());
-                    Object invoke = method.invoke(service, rpcRequest.getParam());
-                    objectOutputStream.writeObject(RpcResponse.success(invoke, 2342L));
-                    objectOutputStream.flush();
-                }
-                logger.info("service is null");
+        try (
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())
+             ) {ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
+            Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamType());
+            Object invoke = method.invoke(service, rpcRequest.getParam());
+            //原来把返回结果封装成RpcResponse，服务端返回数据，客户端读取数据报错
+            objectOutputStream.writeObject(invoke);
+            objectOutputStream.flush();
 
-            } catch (ClassNotFoundException e) {
-                logger.warn("处理请求方法失败",e);
-                throw new RuntimeException(e);
-            } catch (NoSuchMethodException e) {
-                logger.warn("处理请求方法失败",e);
-                throw new RuntimeException(e);
-            } catch (InvocationTargetException e) {
-                logger.warn("处理请求方法失败",e);
-                throw new RuntimeException(e);
-            } catch (IllegalAccessException e) {
-                logger.warn("处理请求方法失败",e);
-                throw new RuntimeException(e);
-            }
-        } catch (IOException e) {
-            logger.warn("处理请求方法失败",e);
+        } catch (ClassNotFoundException | IOException | NoSuchMethodException | InvocationTargetException |
+                 IllegalAccessException e) {
+            logger.warn("处理请求方法失败", e);
             throw new RuntimeException(e);
         }
     }

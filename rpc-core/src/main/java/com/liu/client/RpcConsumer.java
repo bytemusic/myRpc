@@ -21,22 +21,17 @@ public class RpcConsumer {
         try(Socket socket = new Socket(host, port)) {
             // 获取输出流，并使用 ObjectOutputStream 将对象序列化发送给服务端
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(rpcRequest);
-            objectOutputStream.flush(); // 确保将数据发送给服务端
-
-            // 获取输入流，并使用 ObjectInputStream 读取服务端的响应
+            //ObjectInputStream放在objectInputStream.readObject()之前，第一次请求是toString方法
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            if(objectInputStream.available() == 0) {
-                logger.warn("获取服务端返回数据为空");
-            } else {
-                // 返回服务端的响应
-                return objectInputStream.readObject();
-            }
-            return null;
+            objectOutputStream.writeObject(rpcRequest);
+            // 确保将数据发送给服务端
+            objectOutputStream.flush();
+            // 获取输入流，并使用 ObjectInputStream 读取服务端的响应
+            return objectInputStream.readObject();
         } catch (Exception e) {
             // 发生异常时，记录警告信息并返回 null
             logger.warn("RpcClient.sendRequest warning: {}", e);
-            return null;
+            return new Object();
         }
 
     }

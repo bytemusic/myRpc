@@ -16,4 +16,8 @@ WorkThread实现Runnable接口，具体执行事务在run方法里。
    3. 调用Socket的输入流，获取服务端的响应，转化为ObjectInputStream；调用ObjectInputStream的readObject方法，返回。
 4. 遇到难题
    1. 只建立连接，中间处理流程报错，调用远程方法报错.服务端找不到客户端调用的方法,应该是请求参数封装有问题。确实是,在本次提交解决，RpcConsumerProxy
+   2. java.net.SocketException: Broken pipe (Write failed) 服务端没有把返回结果写入输出流，返回给请求端。
+      1. 第一次请求端传参方法名称为toSting方法（RpcRequest(ip=127.0.0.1, interfaceName=java.lang.Object, methodName=toString, param=null, paramType=[])）,
+      导致服务端处理不了，客户端再次请求，服务端判断socket是否正在建立连接，此时莫名奇妙，连接断开.
+      解决了上面的问题，一是ObjectInputStream的位置，二是RpcConsumerProxy调用sendRequest的返回参数
 

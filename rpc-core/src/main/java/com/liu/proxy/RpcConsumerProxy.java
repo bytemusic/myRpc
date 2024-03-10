@@ -4,6 +4,8 @@ import com.liu.client.RpcConsumer;
 import com.liu.model.RpcRequest;
 import com.liu.model.RpcResponse;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -16,6 +18,8 @@ import java.lang.reflect.Proxy;
  */
 @AllArgsConstructor
 public class RpcConsumerProxy implements InvocationHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(RpcConsumerProxy.class);
 
     private String ip;
 
@@ -32,7 +36,15 @@ public class RpcConsumerProxy implements InvocationHandler {
                 .build();
         //用RpcClient发送请求
         RpcConsumer rpcConsumer = new RpcConsumer();
-        return ((RpcResponse<?>)rpcConsumer.sendRequest(rpcRequest, ip, port)).getModel();
+        Object model = rpcConsumer.sendRequest(rpcRequest, ip, port);
+
+        if (method != null) {
+            return model;
+        } else {
+            logger.warn("服务端返回数据为null");
+        }
+        return null;
+
     }
 
     /**

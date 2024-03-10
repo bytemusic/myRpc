@@ -17,8 +17,11 @@ public class FirstRpcServiceImpl implements FirstRpcService {
         String name = "";
         if (FirstRpcModel.getMessage().equals("www.baidu.com")) {
             name = "百度";
+            logger.info("请求网站:{}的中文名称为{}", FirstRpcModel.getUrl(), name);
+            logger.info("服务端执行了远程方法");
+            return "服务id为" + FirstRpcModel.getId() + "的请求网站" + FirstRpcModel.getUrl()+ "的中文名称为" + name;
+        } else {
+            return "暂时无法为你解析网站";
         }
-        logger.info("请求网站:{}的中文名称为{}", FirstRpcModel.getUrl(), name);
-        return "服务id为" + FirstRpcModel.getId() + "请求网站的中文名称为" + name;
     }
 }

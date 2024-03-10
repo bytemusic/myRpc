@@ -2,6 +2,7 @@ package com.liu.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -13,13 +14,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
     /**
-     * 请求id
-     */
-    private long requestId;
-    /**
      * 返回码
      */
-    private int code;
+    private Integer statusCode;
 
     /**
      * 返回码信息
@@ -31,12 +28,9 @@ public class RpcResponse<T> implements Serializable {
      */
     private T model;
 
-    public void setRequestId(long requestId) {
-        this.requestId = requestId;
-    }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(Integer statusCode) {
+        this.statusCode = statusCode;
     }
 
     public void setMessage(String message) {
@@ -48,17 +42,16 @@ public class RpcResponse<T> implements Serializable {
     }
 
 
-    public static <T> RpcResponse<T> success(T model, long requestId) {
-        RpcResponse rpcResponse = new RpcResponse();
-        rpcResponse.setRequestId(requestId);
+    public static <T> RpcResponse<T> success(T model) {
+        RpcResponse<T> rpcResponse = new RpcResponse();
         rpcResponse.setCode(200);
         rpcResponse.setMessage("请求成功");
         rpcResponse.setModel(model);
         return rpcResponse;
     }
 
-    public static <T> RpcResponse<T> fail(long requestId) {
-        RpcResponse rpcResponse = new RpcResponse();
+    public static <T> RpcResponse<T> fail(Integer statusCode) {
+        RpcResponse<T> rpcResponse = new RpcResponse();
         rpcResponse.setCode(500);
         rpcResponse.setMessage("请求失败");
         return rpcResponse;
